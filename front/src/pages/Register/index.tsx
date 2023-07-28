@@ -1,4 +1,17 @@
+import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { RegisterLoginContext } from "../../providers/RegistesLoginProvider";
+import { TRegisterData, schemaRegister } from "./validatorRegister";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 export const Register = () => {
+  const { register, handleSubmit } = useForm<TRegisterData>({
+    resolver: zodResolver(schemaRegister),
+  });
+
+  const { registerUser } = useContext(RegisterLoginContext);
+
   return (
     <main className="w-full flex">
       <div className="relative flex-1 hidden items-center justify-center h-screen bg-gray-900 lg:flex">
@@ -55,13 +68,13 @@ export const Register = () => {
                 Cadastre-se
               </h3>
               <p className="">
-                Você tá tem uma conta?{" "}
-                <a
-                  href="javascript:void(0)"
+                Você já tem uma conta?{" "}
+                <Link
+                  to="/"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
                   Log in
-                </a>
+                </Link>
               </p>
             </div>
           </div>
@@ -72,13 +85,14 @@ export const Register = () => {
               Ou continuar com...
             </p>
           </div>
-          <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+          <form onSubmit={handleSubmit(registerUser)} className="space-y-5">
             <div>
               <label className="font-medium">Nome</label>
               <input
                 type="text"
                 required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                {...register("name")}
               />
             </div>
             <div>
@@ -87,6 +101,7 @@ export const Register = () => {
                 type="email"
                 required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                {...register("email")}
               />
             </div>
             <div>
@@ -95,17 +110,24 @@ export const Register = () => {
                 type="password"
                 required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                {...register("password")}
               />
             </div>
             <div>
               <label className="font-medium">Telefone</label>
               <input
-                type="password"
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
                 required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                {...register("phone")}
               />
             </div>
-            <button className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
+            <button
+              type="submit"
+              className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
+            >
               Criar Conta
             </button>
           </form>

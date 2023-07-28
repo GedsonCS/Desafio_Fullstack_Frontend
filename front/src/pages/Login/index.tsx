@@ -3,6 +3,7 @@ import { TLoginData, schemaLogin } from "./validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
 import { RegisterLoginContext } from "../../providers/RegistesLoginProvider";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
   const { register, handleSubmit } = useForm<TLoginData>({
@@ -20,12 +21,12 @@ export const Login = () => {
             </h3>
             <p className="">
               Você ainda não tem uma conta?{" "}
-              <a
-                href="javascript:void(0)"
+              <Link
+                to="/register"
                 className="font-medium text-indigo-600 hover:text-indigo-500"
               >
                 cadastre-se
-              </a>
+              </Link>
             </p>
           </div>
         </div>
