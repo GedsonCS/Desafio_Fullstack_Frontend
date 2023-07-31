@@ -79,7 +79,7 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
 
           api.defaults.headers.common.authorization = `Bearer ${token}`;
         } catch (error) {
-          console.log(error);
+          toast.error(`${error}`);
         }
       };
       ListContacts();
