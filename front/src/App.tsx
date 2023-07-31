@@ -1,10 +1,13 @@
 import { RoutesMain } from "./Routes";
+import { ContactProvider } from "./providers/ContactProvider";
 import { RegisterLoginProvider } from "./providers/RegistesLoginProvider";
 function App() {
   return (
     <>
       <RegisterLoginProvider>
-        <RoutesMain />
+        <ContactProvider>
+          <RoutesMain />
+        </ContactProvider>
       </RegisterLoginProvider>
     </>
   );
