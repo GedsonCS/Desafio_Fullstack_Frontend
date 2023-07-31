@@ -126,12 +126,11 @@ export const RegisterLoginProvider = ({
     const token = localStorage.getItem("token");
 
     try {
-      const response = await api.delete(`/users/${user?.id}`, {
+      await api.delete(`/users/${user?.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response);
       localStorage.removeItem("token");
       localStorage.removeItem("UserData");
       setmodalDeleteUser(false);
