@@ -9,6 +9,9 @@ import { TRegisterContact } from "../components/modalResterContact/validatorRegi
 import { api } from "../services/api";
 import { RegisterLoginContext } from "./RegistesLoginProvider";
 import { TUpdateContact } from "../components/modalUpdateContact/validatorUpdateContact";
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 interface IContactProviderProps {
   children: ReactNode;
@@ -55,8 +58,9 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
         },
       });
       setmodalRegisterContact(false);
+      toast.success(`Contato Criado com Sucesso`);
     } catch (error) {
-      console.log(error);
+      toast.error(`${error}`);
     }
   };
 
@@ -91,8 +95,10 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
           Authorization: `Bearer ${token}`,
         },
       });
+      setmodalUpdateContact(false);
+      toast.success(`Contato Atualizado com Sucesso`);
     } catch (error) {
-      console.log(error);
+      toast.error(`${error}`);
     }
   };
 
@@ -100,13 +106,15 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
     const token = localStorage.getItem("token");
 
     try {
-      await api.delete(`/contact/${card?.id}`, {
+      const response = await api.delete(`/contact/${card?.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log(response.data);
+      toast.success(`Contato Deletado com Sucesso`);
     } catch (error) {
-      console.log(error);
+      toast.error(`${error}`);
     }
   };
   return (

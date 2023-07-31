@@ -4,6 +4,9 @@ import { api } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { TRegisterData } from "../pages/Register/validatorRegister";
 import { TUptadeUser } from "../components/ModalUpdateUser/validatorUpdateUser";
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 interface IRegisterloginProviderProps {
   children: ReactNode;
@@ -84,13 +87,14 @@ export const RegisterLoginProvider = ({
 
       navigate("dashboard");
     } catch (error) {
-      console.log(error);
+      toast.error(`${error}`);
     }
   };
 
   const Logout = async () => {
     localStorage.removeItem("token");
     localStorage.removeItem("UserData");
+
     navigate("/");
   };
 
@@ -100,8 +104,11 @@ export const RegisterLoginProvider = ({
 
       setUser(response.data);
       navigate("/");
+      toast.success(
+        `Cadastro efetuado com sucesso, agora preencha sua informações para logar na plataforma`
+      );
     } catch (error) {
-      console.log(error);
+      toast.error(`${error}`);
     }
   };
 
@@ -117,8 +124,9 @@ export const RegisterLoginProvider = ({
 
       setUser(response.data);
       setmodalUpdateUser(false);
+      toast.success(`Perfil Atualizado com Sucesso`);
     } catch (error) {
-      console.log(error);
+      toast.error(`${error}`);
     }
   };
 
@@ -135,8 +143,9 @@ export const RegisterLoginProvider = ({
       localStorage.removeItem("UserData");
       setmodalDeleteUser(false);
       navigate("/");
+      toast.success(`Perfil Deletado com Sucesso`);
     } catch (error) {
-      console.log(error);
+      toast.error(`${error}`);
     }
   };
 
