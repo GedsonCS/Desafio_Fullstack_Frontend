@@ -116,6 +116,7 @@ export const RegisterLoginProvider = ({
       });
 
       setUser(response.data);
+      setmodalUpdateUser(false);
     } catch (error) {
       console.log(error);
     }
@@ -133,6 +134,7 @@ export const RegisterLoginProvider = ({
       console.log(response);
       localStorage.removeItem("token");
       localStorage.removeItem("UserData");
+      setmodalDeleteUser(false);
       navigate("/");
     } catch (error) {
       console.log(error);
