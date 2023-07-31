@@ -85,7 +85,7 @@ export const RegisterLoginProvider = ({
       const userDataString = JSON.stringify(responseGet.data);
       localStorage.setItem("UserData", userDataString);
 
-      navigate("dashboard");
+      window.location.replace("/dashboad");
     } catch (error) {
       toast.error(`${error}`);
     }
@@ -94,8 +94,8 @@ export const RegisterLoginProvider = ({
   const Logout = async () => {
     localStorage.removeItem("token");
     localStorage.removeItem("UserData");
-
-    navigate("/");
+    setUser(null);
+    window.location.replace("/");
   };
 
   const registerUser = async (data: TRegisterData) => {

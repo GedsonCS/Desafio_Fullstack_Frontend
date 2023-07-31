@@ -46,7 +46,7 @@ export const HeaderDashboard = () => {
           </p>
           <p
             className="block px-4 py-2 mt-3 text-center text-gray-700 duration-150 font-medium rounded-lg border hover:bg-gray-50 active:bg-gray-100 sm:mt-0 md:text-sm cursor-pointer"
-            onClick={Logout}
+            onClick={() => Logout()}
           >
             Logout
           </p>
