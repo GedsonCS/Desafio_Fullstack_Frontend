@@ -20,6 +20,14 @@ interface IUser {
   createdAt: Date;
 }
 
+interface IContact {
+  id: number;
+  contactName: string;
+  contactEmail: string;
+  contactPhone: number;
+  createdAt: Date;
+}
+
 interface IRegisterloginContext {
   login: (data: TLoginData) => Promise<void>;
   registerUser: (data: TRegisterData) => Promise<void>;
@@ -34,6 +42,8 @@ interface IRegisterloginContext {
   deleteUser: () => Promise<void>;
   modalRegisterContact: boolean;
   setmodalRegisterContact: React.Dispatch<React.SetStateAction<boolean>>;
+  setListContactsUser: React.Dispatch<React.SetStateAction<IContact[] | null>>;
+  ListContactsUser: IContact[] | null;
 }
 
 export const RegisterLoginContext = createContext({} as IRegisterloginContext);
@@ -45,6 +55,9 @@ export const RegisterLoginProvider = ({
   const [modalUpdateUser, setmodalUpdateUser] = useState(false);
   const [modalDeleteUser, setmodalDeleteUser] = useState(false);
   const [modalRegisterContact, setmodalRegisterContact] = useState(false);
+  const [ListContactsUser, setListContactsUser] = useState<null | IContact[]>(
+    null
+  );
 
   const navigate = useNavigate();
 
@@ -85,7 +98,14 @@ export const RegisterLoginProvider = ({
       const userDataString = JSON.stringify(responseGet.data);
       localStorage.setItem("UserData", userDataString);
 
-      window.location.replace("/dashboad");
+      const responseGet2 = await api.get("/contact", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setListContactsUser(responseGet2.data);
+
+      navigate("/dashboard");
     } catch (error) {
       toast.error(`${error}`);
     }
@@ -95,7 +115,7 @@ export const RegisterLoginProvider = ({
     localStorage.removeItem("token");
     localStorage.removeItem("UserData");
     setUser(null);
-    window.location.replace("/");
+    navigate("/");
   };
 
   const registerUser = async (data: TRegisterData) => {
@@ -165,6 +185,8 @@ export const RegisterLoginProvider = ({
         deleteUser,
         modalRegisterContact,
         setmodalRegisterContact,
+        ListContactsUser,
+        setListContactsUser,
       }}
     >
       {children}

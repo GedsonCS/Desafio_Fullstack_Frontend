@@ -36,16 +36,16 @@ interface IContactContext {
   modalDeleteContact: boolean;
   setmodalDeleteContact: React.Dispatch<React.SetStateAction<boolean>>;
   deleteContact: () => Promise<void>;
+  setListContactsUser: React.Dispatch<React.SetStateAction<IContact[] | null>>;
 }
 
 export const ContactContext = createContext({} as IContactContext);
 
 export const ContactProvider = ({ children }: IContactProviderProps) => {
-  const { setmodalRegisterContact } = useContext(RegisterLoginContext);
+  const { setmodalRegisterContact, ListContactsUser, setListContactsUser } =
+    useContext(RegisterLoginContext);
   const token = localStorage.getItem("token");
-  const [ListContactsUser, setListContactsUser] = useState<null | IContact[]>(
-    null
-  );
+
   const [modalUpdateContact, setmodalUpdateContact] = useState(false);
   const [card, setcard] = useState<null | IContact>(null);
   const [modalDeleteContact, setmodalDeleteContact] = useState(false);
@@ -130,6 +130,7 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
         setmodalDeleteContact,
         modalDeleteContact,
         deleteContact,
+        setListContactsUser,
       }}
     >
       {children}
