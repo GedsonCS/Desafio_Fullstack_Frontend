@@ -50,6 +50,15 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
   const [card, setcard] = useState<null | IContact>(null);
   const [modalDeleteContact, setmodalDeleteContact] = useState(false);
 
+  const renderContact = async () => {
+    const responseGet = await api.get("/contact", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setListContactsUser(responseGet.data);
+  };
+
   const registerContact = async (data: TRegisterContact) => {
     try {
       await api.post("/contact", data, {
@@ -59,12 +68,7 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
       });
       setmodalRegisterContact(false);
 
-      const responseGet = await api.get("/contact", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setListContactsUser(responseGet.data);
+      renderContact();
       toast.success(`Contato Criado com Sucesso`);
     } catch (error) {
       toast.error(`${error}`);
@@ -103,6 +107,7 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
         },
       });
       setmodalUpdateContact(false);
+      renderContact();
       toast.success(`Contato Atualizado com Sucesso`);
     } catch (error) {
       toast.error(`${error}`);
@@ -119,6 +124,7 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
         },
       });
       console.log(response.data);
+      renderContact();
       toast.success(`Contato Deletado com Sucesso`);
     } catch (error) {
       toast.error(`${error}`);
