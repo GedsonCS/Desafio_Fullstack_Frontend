@@ -11,7 +11,6 @@ function ModalUpdateUser() {
   const { register, handleSubmit } = useForm<TUptadeUser>({
     resolver: zodResolver(schemaUpdateUser),
   });
-
   return modalUpdateUser ? (
     <div className="fixed inset-0 z-10 overflow-y-auto">
       <div
@@ -47,7 +46,6 @@ function ModalUpdateUser() {
               <label className="font-medium">Nome</label>
               <input
                 type="text"
-                required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                 {...register("name")}
               />
@@ -56,7 +54,6 @@ function ModalUpdateUser() {
               <label className="font-medium">Email</label>
               <input
                 type="email"
-                required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                 {...register("email")}
               />
@@ -65,7 +62,6 @@ function ModalUpdateUser() {
               <label className="font-medium">Senha</label>
               <input
                 type="password"
-                required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                 {...register("password")}
               />
@@ -74,7 +70,6 @@ function ModalUpdateUser() {
               <label className="font-medium">Telefone</label>
               <input
                 type="number"
-                required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                 {...register("phone")}
               />

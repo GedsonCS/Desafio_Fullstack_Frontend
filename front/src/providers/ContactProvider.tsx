@@ -58,6 +58,13 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
         },
       });
       setmodalRegisterContact(false);
+
+      const responseGet = await api.get("/contact", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setListContactsUser(responseGet.data);
       toast.success(`Contato Criado com Sucesso`);
     } catch (error) {
       toast.error(`${error}`);
@@ -84,7 +91,7 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
       };
       ListContacts();
     }
-  }, [ListContactsUser]);
+  }, []);
 
   const updateContact = async (data: TUpdateContact) => {
     const token = localStorage.getItem("token");

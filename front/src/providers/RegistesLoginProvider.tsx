@@ -134,6 +134,23 @@ export const RegisterLoginProvider = ({
 
   const updateUser = async (data: TUptadeUser) => {
     const token = localStorage.getItem("token");
+    if (data.email === "") {
+      delete data.email;
+    }
+    if (data.name === "") {
+      delete data.name;
+    }
+    if (data.password === "") {
+      delete data.password;
+    }
+    if (data.phone === "") {
+      delete data.phone;
+    }
+
+    if (!data.email && !data.name && !data.password && !data.phone) {
+      toast.error("nenhuma informação foi passada");
+      return;
+    }
 
     try {
       const response = await api.patch(`/users/${user?.id}`, data, {
