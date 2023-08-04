@@ -2,30 +2,68 @@
 
 debloy na versel https://front-gedsoncs.vercel.app/
 
-# React + TypeScript + Vite
+para iniciar a aplicação localmente é necessário acessar a pasta front iniciar com o conamdo npm install depois npm run dev e acessar a porta local do aparelho na WEB
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Documentação do Frontend
+Introdução
+Neste documento, apresentamos a documentação para o frontend da aplicação de cadastro de clientes e contatos. Descrevemos as principais funcionalidades, fluxos de trabalho e componentes do frontend, além de fornecer instruções para execução e configuração do projeto.
 
-Currently, two official plugins are available:
+Sobre o Frontend
+O frontend é a interface de usuário da aplicação de cadastro de clientes e contatos. Ele permite que os usuários interajam com a API para realizar operações de cadastro, atualização e exclusão de clientes e seus respectivos contatos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Tecnologias Utilizadas
+React: Biblioteca JavaScript para construção de interfaces de usuário.
+Axios: Cliente HTTP para fazer requisições à API.
+React Hook Form: Biblioteca para gerenciar formulários de forma eficiente.
+Zod: Biblioteca para validação de esquemas de dados.
+Context API: Gerenciamento de estado global da aplicação.
+Toastify: Exibição de notificações na interface.
+Tailwind CSS: Framework de CSS para estilização responsiva.
 
-## Expanding the ESLint configuration
+Funcionalidades
+A aplicação frontend oferece as seguintes funcionalidades:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Cadastro de Usuário: Permite o cadastro de novos usuários, fornecendo informações como nome, email, senha e telefone.
 
-- Configure the top-level `parserOptions` property like this:
+Login de Usuário: Permite que os usuários façam login na aplicação fornecendo suas credenciais.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+Listagem de Usuário: Exibe os dados do usuário logado, incluindo nome, email, telefone.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Atualização de Usuário: Permite que o usuário atualize suas informações, como email, nome, senha e telefone.
+
+Deleção de Usuário: Permite que o usuário exclua sua conta da aplicação.
+
+Cadastro de Contato: Permite que o usuário cadastre novos contatos associados ao seu perfil, fornecendo nome, email e telefone.
+
+Listagem de Contatos: Exibe a lista de contatos vinculados ao usuário logado.
+
+Atualização de Contato: Permite que o usuário atualize as informações de um contato existente.
+
+Deleção de Contato: Permite que o usuário exclua um contato da lista.
+
+Fluxo de Trabalho
+O fluxo de trabalho básico da aplicação é o seguinte:
+
+O usuário pode se cadastrar ou fazer login na aplicação.
+
+Após o login, o usuário é redirecionado para a página de listagem de contatos.
+
+O usuário pode visualizar, cadastrar, atualizar e excluir contatos associados à sua conta.
+
+O usuário também pode atualizar suas informações pessoais e, se desejar, excluir sua conta.
+
+Configuração e Execução
+Siga os passos abaixo para configurar e executar o frontend da aplicação:
+
+Certifique-se de ter o Node.js instalado em sua máquina.
+
+Clone o repositório do frontend.
+
+Navegue até o diretório do frontend no terminal.
+
+Execute o seguinte comando para instalar as dependências:
+npm install
+
+Execute o seguinte comando para iniciar o servidor de desenvolvimento:
+
+npm run dev
